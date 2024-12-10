@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCP API Guide Style - Especificación OpenAPI v3.0.1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar (Índice) -->
+    <aside class="sidebar">
+        <h2>Índice</h2>
+        <ul>
+            <li><a href="#openapi">1. openapi</a></li>
+            <li><a href="#info">2. Info</a></li>
+            <li><a href="#servers">3. Servers</a></li>
+            <li><a href="#paths">4. Paths</a></li>
+            <li><a href="#components">5. Components</a></li>
+            <li><a href="#security">6. Security</a></li>
+            <li><a href="#tags">7. Tags</a></li>
+            <li><a href="#external-docs">8. External Documentation</a></li>
+            <li><a href="#complete-example">9. Ejemplo Completo</a></li>
+        </ul>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="content">
+        <h1>Guía de Estilo BCP API - Especificación OpenAPI v3.0.1</h1>
+        <p>
+            Bienvenido a la <strong>Guía de Estilo BCP API</strong>. Este documento proporciona una estructura completa y detallada para la creación de especificaciones OpenAPI, asegurando coherencia, calidad y facilidad de mantenimiento en el diseño de nuestras APIs.
+        </p>
+
+        <!-- Sección 1: openapi -->
+        <section id="openapi">
+            <h2>1. openapi</h2>
+            <p><span class="important">Obligatorio:</span> Este campo especifica la versión de la especificación OpenAPI que se está utilizando. Es crucial para asegurar la compatibilidad y correcta interpretación del documento por herramientas y bibliotecas.</p>
+            <h3>Ejemplo:</h3>
+            <pre><code>openapi: 3.0.1</code></pre>
+        </section>
+
+        <!-- Sección 2: Info -->
+        <section id="info">
+            <h2>2. Info</h2>
+            <p><span class="important">Obligatorio:</span> Proporciona metadatos sobre la API, incluyendo título, descripción, términos de servicio, información de contacto, licencia y versión. Estos datos son esenciales para que los consumidores de la API comprendan su propósito y cómo utilizarla adecuadamente.</p>
+            <h3>Subsecciones:</h3>
+            <ul>
+                <li><a href="#info-title">2.1. Title</a></li>
+                <li><a href="#info-description">2.2. Description</a></li>
+                <li><a href="#info-terms-of-service">2.3. Terms of Service</a></li>
+                <li><a href="#info-contact">2.4. Contact</a></li>
+                <li><a href="#info-license">2.5. License</a></li>
+                <li><a href="#info-version">2.6. Version</a></li>
+            </ul>
+
+            <!-- Ejemplos de Subsecciones -->
+            <h3 id="info-title">2.1. Title</h3>
+            <p><span class="important">Obligatorio:</span> Nombre claro y conciso de la API. Debe reflejar su propósito principal.</p>
+            <h4>Ejemplo:</h4>
+            <pre><code>title: BCP API Guide</code></pre>
+
+            <h3 id="info-description">2.2. Description</h3>
+            <p><span class="important">Obligatorio:</span> Descripción detallada de la API, sus funcionalidades principales y casos de uso. Utiliza formato de texto enriquecido (multilínea) para mayor claridad.</p>
+            <h4>Ejemplo:</h4>
+            <pre><code>description: |
+  Esta API permite gestionar los empleados de BCP, incluyendo operaciones para crear, leer, actualizar y eliminar registros de empleados.</code></pre>
+        </section>
+
+        <!-- Sección 3: Servers -->
+        <section id="servers">
+            <h2>3. Servers</h2>
+            <p><span class="optional">Opcional:</span> Define las URLs de los servidores donde está desplegada la API. Permite especificar diferentes entornos como producción y sandbox.</p>
+            <h3>Ejemplo:</h3>
+            <pre><code>servers:
+  - url: https://api.bcp.com.pe/v1
+    description: Servidor de Producción
+  - url: https://sandbox.api.bcp.com.pe/v1
+    description: Servidor de Sandbox</code></pre>
+        </section>
+
+        <!-- Sección 4: Paths -->
+        <section id="paths">
+            <h2>4. Paths</h2>
+            <p><span class="important">Obligatorio:</span> Define los endpoints disponibles en la API y los métodos HTTP que soportan (GET, POST, PUT, DELETE).</p>
+            <h3>Ejemplo:</h3>
+            <pre><code>paths:
+  /employees:
+    get:
+      summary: Obtener lista de empleados
+      responses:
+        '200':
+          description: Lista obtenida exitosamente</code></pre>
+        </section>
+
+        <!-- Sección 5: Components -->
+        <section id="components">
+            <h2>5. Components</h2>
+            <p><span class="optional">Opcional:</span> Contiene definiciones reutilizables que pueden ser referenciadas en diferentes partes de la especificación.</p>
+            <h3>Ejemplo de Esquema:</h3>
+            <pre><code>schemas:
+  Employee:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: integer
+      name:
+        type: string</code></pre>
+        </section>
+
+        <!-- Sección 6: Security -->
+        <section id="security">
+            <h2>6. Security</h2>
+            <p><span class="optional">Opcional:</span> Define los mecanismos de autenticación y autorización que se aplican globalmente a la API.</p>
+            <h3>Ejemplo:</h3>
+            <pre><code>security:
+  - ApiKeyAuth: []
+  - OAuth2:
+      - read</code></pre>
+        </section>
+
+        <!-- Sección 9: Ejemplo Completo -->
+        <section id="complete-example">
+            <h2>9. Ejemplo Completo</h2>
+            <p>Este es un ejemplo completo de una especificación OpenAPI basada en un CRUD de empleados.</p>
+            <pre><code>openapi: 3.0.1
+info:
+  title: BCP Employee Management API
+  version: 1.0.0
+paths:
+  /employees:
+    get:
+      summary: Lista de empleados
+      responses:
+        '200':
+          description: Operación exitosa</code></pre>
+        </section>
+    </main>
+</body>
+</html>

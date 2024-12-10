@@ -1,0 +1,141 @@
+/* Variables de Diseño */
+:root {
+    --primary-color: #005A9E;
+    --background-color: #F9F9F9;
+    --sidebar-bg: #FFFFFF;
+    --text-color: #333333;
+    --link-color: #005A9E;
+    --link-hover-color: #003366;
+    --border-color: #E0E0E0;
+    --note-bg: #FFF4CE;
+    --note-border: #FFC107;
+
+    --font-primary: 'Segoe UI', sans-serif;
+    --font-code: 'Source Code Pro', monospace;
+
+    --spacing: 16px;
+    --border-radius: 8px;
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: var(--spacing);
+    border-right: 1px solid var(--border-color);
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing);
+    color: var(--primary-color);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 8px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Contenido Principal */
+.content {
+    margin-left: 270px;
+    padding: var(--spacing);
+    flex-grow: 1;
+    max-width: 900px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing);
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin: var(--spacing) 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: var(--spacing) 0 8px;
+}
+
+p {
+    margin-bottom: var(--spacing);
+}
+
+ul {
+    margin-bottom: var(--spacing);
+    margin-left: var(--spacing);
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Código */
+pre {
+    background-color: var(--note-bg);
+    padding: var(--spacing);
+    border: 1px solid var(--note-border);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin-bottom: var(--spacing);
+}
+
+code {
+    font-family: var(--font-code);
+    background-color: #f3f3f3;
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
