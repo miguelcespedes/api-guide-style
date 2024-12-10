@@ -3,139 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCP API Guide Style - Especificación OpenAPI v3.0.1</title>
+    <title>Guía Completa OpenAPI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Sidebar (Índice) -->
-    <aside class="sidebar">
-        <h2>Índice</h2>
-        <ul>
-            <li><a href="#openapi">1. openapi</a></li>
-            <li><a href="#info">2. Info</a></li>
-            <li><a href="#servers">3. Servers</a></li>
-            <li><a href="#paths">4. Paths</a></li>
-            <li><a href="#components">5. Components</a></li>
-            <li><a href="#security">6. Security</a></li>
-            <li><a href="#tags">7. Tags</a></li>
-            <li><a href="#external-docs">8. External Documentation</a></li>
-            <li><a href="#complete-example">9. Ejemplo Completo</a></li>
-        </ul>
-    </aside>
+    <!-- Header -->
+    <header class="bg-light shadow-sm px-4 py-3">
+        <div id="header-content"></div>
+    </header>
 
-    <!-- Contenido Principal -->
-    <main class="content">
-        <h1>Guía de Estilo BCP API - Especificación OpenAPI v3.0.1</h1>
-        <p>
-            Bienvenido a la <strong>Guía de Estilo BCP API</strong>. Este documento proporciona una estructura completa y detallada para la creación de especificaciones OpenAPI, asegurando coherencia, calidad y facilidad de mantenimiento en el diseño de nuestras APIs.
-        </p>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block sidebar">
+                <h5 class="fw-bold">Índice</h5>
+                <ul class="nav flex-column" id="sidebar-sections"></ul>
+            </div>
 
-        <!-- Sección 1: openapi -->
-        <section id="openapi">
-            <h2>1. openapi</h2>
-            <p><span class="important">Obligatorio:</span> Este campo especifica la versión de la especificación OpenAPI que se está utilizando. Es crucial para asegurar la compatibilidad y correcta interpretación del documento por herramientas y bibliotecas.</p>
-            <h3>Ejemplo:</h3>
-            <pre><code>openapi: 3.0.1</code></pre>
-        </section>
+            <!-- Main Content -->
+            <div class="col-lg-9 main-content">
+                <div id="content"></div>
+            </div>
+        </div>
+    </div>
 
-        <!-- Sección 2: Info -->
-        <section id="info">
-            <h2>2. Info</h2>
-            <p><span class="important">Obligatorio:</span> Proporciona metadatos sobre la API, incluyendo título, descripción, términos de servicio, información de contacto, licencia y versión. Estos datos son esenciales para que los consumidores de la API comprendan su propósito y cómo utilizarla adecuadamente.</p>
-            <h3>Subsecciones:</h3>
-            <ul>
-                <li><a href="#info-title">2.1. Title</a></li>
-                <li><a href="#info-description">2.2. Description</a></li>
-                <li><a href="#info-terms-of-service">2.3. Terms of Service</a></li>
-                <li><a href="#info-contact">2.4. Contact</a></li>
-                <li><a href="#info-license">2.5. License</a></li>
-                <li><a href="#info-version">2.6. Version</a></li>
-            </ul>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cargar el JSON dinámicamente
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Header dinámico
+                const header = document.getElementById('header-content');
+                header.innerHTML = `
+                    <h1 class="fw-bold">${data.title}</h1>
+                    <p class="text-muted">${data.description}</p>
+                `;
 
-            <!-- Ejemplos de Subsecciones -->
-            <h3 id="info-title">2.1. Title</h3>
-            <p><span class="important">Obligatorio:</span> Nombre claro y conciso de la API. Debe reflejar su propósito principal.</p>
-            <h4>Ejemplo:</h4>
-            <pre><code>title: BCP API Guide</code></pre>
+                // Sidebar y contenido
+                const sidebar = document.getElementById('sidebar-sections');
+                const content = document.getElementById('content');
 
-            <h3 id="info-description">2.2. Description</h3>
-            <p><span class="important">Obligatorio:</span> Descripción detallada de la API, sus funcionalidades principales y casos de uso. Utiliza formato de texto enriquecido (multilínea) para mayor claridad.</p>
-            <h4>Ejemplo:</h4>
-            <pre><code>description: |
-  Esta API permite gestionar los empleados de BCP, incluyendo operaciones para crear, leer, actualizar y eliminar registros de empleados.</code></pre>
-        </section>
+                data.sections.forEach(section => {
+                    // Sidebar
+                    const sidebarItem = document.createElement('li');
+                    sidebarItem.innerHTML = `<a class="nav-link" href="#${section.id}">${section.title}</a>`;
+                    sidebar.appendChild(sidebarItem);
 
-        <!-- Sección 3: Servers -->
-        <section id="servers">
-            <h2>3. Servers</h2>
-            <p><span class="optional">Opcional:</span> Define las URLs de los servidores donde está desplegada la API. Permite especificar diferentes entornos como producción y sandbox.</p>
-            <h3>Ejemplo:</h3>
-            <pre><code>servers:
-  - url: https://api.bcp.com.pe/v1
-    description: Servidor de Producción
-  - url: https://sandbox.api.bcp.com.pe/v1
-    description: Servidor de Sandbox</code></pre>
-        </section>
+                    // Main Content
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.id = section.id;
+                    sectionDiv.className = 'card p-4 mb-3';
 
-        <!-- Sección 4: Paths -->
-        <section id="paths">
-            <h2>4. Paths</h2>
-            <p><span class="important">Obligatorio:</span> Define los endpoints disponibles en la API y los métodos HTTP que soportan (GET, POST, PUT, DELETE).</p>
-            <h3>Ejemplo:</h3>
-            <pre><code>paths:
-  /employees:
-    get:
-      summary: Obtener lista de empleados
-      responses:
-        '200':
-          description: Lista obtenida exitosamente</code></pre>
-        </section>
+                    let obligatorioBadge = '';
+                    if (section.obligatorio) {
+                        obligatorioBadge = `<span class="badge bg-danger">Obligatorio</span> `;
+                    }
 
-        <!-- Sección 5: Components -->
-        <section id="components">
-            <h2>5. Components</h2>
-            <p><span class="optional">Opcional:</span> Contiene definiciones reutilizables que pueden ser referenciadas en diferentes partes de la especificación.</p>
-            <h3>Ejemplo de Esquema:</h3>
-            <pre><code>schemas:
-  Employee:
-    type: object
-    required:
-      - id
-      - name
-    properties:
-      id:
-        type: integer
-      name:
-        type: string</code></pre>
-        </section>
+                    sectionDiv.innerHTML = `
+                        <h2>${section.title}</h2>
+                        <p>${obligatorioBadge}${section.description}</p>
+                        ${section.example ? `<h3>Ejemplo:</h3><pre><code>${section.example}</code></pre>` : ''}
+                    `;
 
-        <!-- Sección 6: Security -->
-        <section id="security">
-            <h2>6. Security</h2>
-            <p><span class="optional">Opcional:</span> Define los mecanismos de autenticación y autorización que se aplican globalmente a la API.</p>
-            <h3>Ejemplo:</h3>
-            <pre><code>security:
-  - ApiKeyAuth: []
-  - OAuth2:
-      - read</code></pre>
-        </section>
+                    // Subsections
+                    if (section.subsections) {
+                        section.subsections.forEach(subsection => {
+                            sectionDiv.innerHTML += `
+                                <h3>${subsection.title}</h3>
+                                <p>${subsection.description}</p>
+                                ${subsection.example ? `<h4>Ejemplo:</h4><pre><code>${subsection.example}</code></pre>` : ''}
+                            `;
+                        });
+                    }
 
-        <!-- Sección 9: Ejemplo Completo -->
-        <section id="complete-example">
-            <h2>9. Ejemplo Completo</h2>
-            <p>Este es un ejemplo completo de una especificación OpenAPI basada en un CRUD de empleados.</p>
-            <pre><code>openapi: 3.0.1
-info:
-  title: BCP Employee Management API
-  version: 1.0.0
-paths:
-  /employees:
-    get:
-      summary: Lista de empleados
-      responses:
-        '200':
-          description: Operación exitosa</code></pre>
-        </section>
-    </main>
+                    content.appendChild(sectionDiv);
+                });
+            })
+            .catch(error => console.error('Error cargando el JSON:', error));
+    </script>
 </body>
 </html>

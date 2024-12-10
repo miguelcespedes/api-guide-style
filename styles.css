@@ -1,141 +1,138 @@
-/* Variables de Diseño */
+/* Variables CSS */
 :root {
-    --primary-color: #005A9E;
-    --background-color: #F9F9F9;
-    --sidebar-bg: #FFFFFF;
-    --text-color: #333333;
-    --link-color: #005A9E;
-    --link-hover-color: #003366;
-    --border-color: #E0E0E0;
-    --note-bg: #FFF4CE;
-    --note-border: #FFC107;
-
-    --font-primary: 'Segoe UI', sans-serif;
-    --font-code: 'Source Code Pro', monospace;
-
-    --spacing: 16px;
-    --border-radius: 8px;
+    --primary-color: #0030B3;
+    --primary-hover-color: #002694;
+    --accent-color: #FFD700;
+    --background-light: #f5f5f5;
+    --card-background: #f9f9f9;
+    --text-color: #ffffff;
+    --text-muted: #6c757d;
+    --badge-danger: #dc3545;
 }
 
-/* Reset Básico */
-* {
+/* General reset */
+body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-body {
-    font-family: var(--font-primary);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    display: flex;
-    min-height: 100vh;
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background-color: var(--background-light);
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Alineado a la izquierda */
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 250px;
-    background-color: var(--sidebar-bg);
-    padding: var(--spacing);
-    border-right: 1px solid var(--border-color);
-    height: 100vh;
     position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 1.5rem 1rem;
     overflow-y: auto;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar h2 {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing);
-    color: var(--primary-color);
+.sidebar h5 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
+.sidebar .nav-link {
+    color: var(--text-color);
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
 }
 
-.sidebar ul li {
-    margin-bottom: 8px;
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: var(--accent-color);
+    border-left: 3px solid var(--accent-color);
+    background-color: var(--primary-hover-color);
 }
 
-.sidebar ul li a {
-    text-decoration: none;
-    color: var(--link-color);
-    font-weight: bold;
+/* Main Content Area */
+.main-content {
+    margin-left: 250px; /* Sidebar width */
+    padding: 2rem;
 }
 
-.sidebar ul li a:hover {
-    color: var(--link-hover-color);
+.card {
+    background-color: var(--card-background);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
 }
 
-/* Contenido Principal */
-.content {
-    margin-left: 270px;
-    padding: var(--spacing);
-    flex-grow: 1;
-    max-width: 900px;
-    width: 100%;
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing);
-    color: var(--primary-color);
-}
-
+/* Titles and Subtitles */
 h2 {
-    font-size: 2rem;
-    margin: var(--spacing) 0;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 8px;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 h3 {
-    font-size: 1.5rem;
-    margin: var(--spacing) 0 8px;
+    font-size: 1.25rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
-p {
-    margin-bottom: var(--spacing);
+h4 {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-ul {
-    margin-bottom: var(--spacing);
-    margin-left: var(--spacing);
-}
-
-li {
-    margin-bottom: 8px;
-}
-
-/* Código */
+/* Pre blocks for code */
 pre {
-    background-color: var(--note-bg);
-    padding: var(--spacing);
-    border: 1px solid var(--note-border);
-    border-radius: var(--border-radius);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
     overflow-x: auto;
-    margin-bottom: var(--spacing);
+    background-color: #e9ecef;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    color: #333;
 }
 
-code {
-    font-family: var(--font-code);
-    background-color: #f3f3f3;
-    padding: 4px 8px;
-    border-radius: var(--border-radius);
-}
-
-/* Responsividad */
+/* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
+        position: relative;
         width: 100%;
         height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
     }
 
-    .content {
+    .main-content {
         margin-left: 0;
     }
 }

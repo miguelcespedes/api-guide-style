@@ -1,0 +1,144 @@
+{
+  "title": "Guía de Estilo para diseño OpenAPI v3.0.1",
+  "description": "Este documento contiene todos los elementos de la especificación OpenAPI con explicaciones detalladas y ejemplos prácticos.",
+  "sections": [
+    {
+      "id": "openapi",
+      "title": "1. openapi",
+      "description": "Este campo especifica la versión de la especificación OpenAPI utilizada. Permite garantizar la compatibilidad con herramientas y bibliotecas.",
+      "obligatorio": true,
+      "example": "openapi: 3.0.1"
+    },
+    {
+      "id": "info",
+      "title": "2. Info",
+      "description": "Proporciona metadatos sobre la API, incluyendo título, descripción, términos de servicio, contacto, licencia y versión.",
+      "obligatorio": true,
+      "subsections": [
+        {
+          "id": "info-title",
+          "title": "2.1. Title",
+          "description": "Un título claro y representativo para tu API.",
+          "example": "title: Gestión de Empleados API"
+        },
+        {
+          "id": "info-description",
+          "title": "2.2. Description",
+          "description": "Una descripción detallada que explique el propósito y el uso de la API.",
+          "example": "description: 'Esta API permite gestionar empleados, incluyendo operaciones CRUD, con integración para sistemas externos.'"
+        },
+        {
+          "id": "info-terms-of-service",
+          "title": "2.3. Terms of Service",
+          "description": "La URL que apunta a los términos de servicio de la API.",
+          "example": "termsOfService: https://api.example.com/terms"
+        },
+        {
+          "id": "info-contact",
+          "title": "2.4. Contact",
+          "description": "Información de contacto para soporte o consultas relacionadas con la API.",
+          "example": "contact: { name: 'Soporte API', email: 'soporte@example.com', url: 'https://api.example.com/contact' }"
+        },
+        {
+          "id": "info-license",
+          "title": "2.5. License",
+          "description": "Información sobre la licencia de la API.",
+          "example": "license: { name: 'Apache 2.0', url: 'https://www.apache.org/licenses/LICENSE-2.0.html' }"
+        },
+        {
+          "id": "info-version",
+          "title": "2.6. Version",
+          "description": "La versión actual de la API.",
+          "example": "version: 1.0.0"
+        }
+      ]
+    },
+    {
+      "id": "servers",
+      "title": "3. Servers",
+      "description": "Define los servidores donde está desplegada la API, permitiendo especificar entornos como producción y pruebas.",
+      "obligatorio": false,
+      "example": "servers: [ { url: 'https://api.example.com/v1', description: 'Producción' }, { url: 'https://sandbox.api.example.com/v1', description: 'Pruebas' } ]"
+    },
+    {
+      "id": "paths",
+      "title": "4. Paths",
+      "description": "Define los endpoints disponibles en la API y los métodos HTTP que soportan (GET, POST, PUT, DELETE, etc.). Describe la funcionalidad de cada ruta, los parámetros necesarios y las posibles respuestas.",
+      "obligatorio": true,
+      "subsections": [
+        {
+          "id": "paths-methods",
+          "title": "4.1. Métodos HTTP",
+          "description": "Especifica las operaciones que se pueden realizar en un endpoint determinado.",
+          "example": "get: { summary: 'Obtener lista de empleados', responses: { '200': { description: 'Lista obtenida exitosamente' } } }"
+        },
+        {
+          "id": "paths-parameters",
+          "title": "4.2. Parámetros",
+          "description": "Define los parámetros que pueden ser pasados en la URL, cabeceras o cuerpo de la solicitud.",
+          "example": "parameters: [ { name: 'id', in: 'path', required: true, description: 'ID del empleado', schema: { type: 'integer' } } ]"
+        },
+        {
+          "id": "paths-request-bodies",
+          "title": "4.3. Cuerpos de Solicitud",
+          "description": "Describe el contenido de las solicitudes que incluyen un cuerpo, como POST y PUT.",
+          "example": "requestBody: { content: { 'application/json': { schema: { $ref: '#/components/schemas/Employee' } } } }"
+        },
+        {
+          "id": "paths-responses",
+          "title": "4.4. Respuestas",
+          "description": "Define las posibles respuestas que una operación puede devolver, incluyendo códigos de estado HTTP.",
+          "example": "responses: { '200': { description: 'Operación exitosa', content: { 'application/json': { schema: { type: 'object' } } } } }"
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "title": "5. Components",
+      "description": "Contiene definiciones reutilizables que pueden ser referenciadas en diferentes partes de la especificación, promoviendo la consistencia y reduciendo la duplicación.",
+      "obligatorio": false,
+      "subsections": [
+        {
+          "id": "components-schemas",
+          "title": "5.1. Schemas",
+          "description": "Define la estructura de los datos que maneja la API utilizando JSON Schema.",
+          "example": "schemas: { Employee: { type: 'object', properties: { id: { type: 'integer' }, name: { type: 'string' } } } }"
+        },
+        {
+          "id": "components-parameters",
+          "title": "5.2. Parameters",
+          "description": "Define parámetros reutilizables para varias operaciones.",
+          "example": "parameters: { employeeId: { name: 'id', in: 'path', required: true, schema: { type: 'integer' } } }"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "6. Security",
+      "description": "Define los mecanismos de autenticación y autorización que se aplican globalmente a la API.",
+      "obligatorio": false,
+      "example": "securitySchemes: { ApiKeyAuth: { type: 'apiKey', in: 'header', name: 'X-API-Key' } }"
+    },
+    {
+      "id": "tags",
+      "title": "7. Tags",
+      "description": "Organiza los endpoints en grupos lógicos mediante etiquetas.",
+      "obligatorio": false,
+      "example": "tags: [ { name: 'Empleados', description: 'Operaciones relacionadas con empleados' } ]"
+    },
+    {
+      "id": "external-docs",
+      "title": "8. External Documentation",
+      "description": "Proporciona enlaces a documentación externa adicional que complemente la especificación principal.",
+      "obligatorio": false,
+      "example": "externalDocs: { description: 'Documentación completa', url: 'https://docs.example.com/api' }"
+    },
+    {
+      "id": "example",
+      "title": "9. Ejemplo Completo",
+      "description": "Ejemplo completo que integra todos los elementos mencionados anteriormente, basado en un CRUD de empleados.",
+      "obligatorio": false,
+      "example": "openapi: 3.0.1\ninfo: { title: 'Gestión de Empleados API', version: '1.0.0' }\nservers: [ { url: 'https://api.example.com/v1' } ]\npaths: { '/employees': { get: { responses: { '200': { description: 'Lista obtenida' } } } } }"
+    }
+  ]
+}
